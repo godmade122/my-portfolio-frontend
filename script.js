@@ -112,7 +112,7 @@ document.querySelectorAll('section > .container').forEach(section => {
     };
 
     try {
-        const response = await fetch("https://my-portfolio-backend-5u2n.onrender.com/contact", {
+        const response = await fetch("https://my-portfolio-backend-5u2n.onrender.com/api/contact", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
