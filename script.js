@@ -121,9 +121,12 @@ document.querySelectorAll('section > .container').forEach(section => {
         });
 
         const result = await response.json();
-        alert(result.success);
-        if (result.success) {
+        alert(result.message);
+        if (result.message) {
+            alert("Message sent successfully!");
             form.reset();
+        } else {
+            alert("result message.");
         }
     } catch (err) {
         alert("Server Error");
