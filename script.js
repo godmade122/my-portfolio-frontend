@@ -2,10 +2,28 @@
 const hamburger = document.getElementById('hamburger');
 const navList = document.getElementById('nav-list');
 
-hamburger.addEventListener('click', () => {
-    navList.classList.toggle('active');
-    hamburger.classList.toggle('active');
-});
+if (hamburger && navList) {
+    const closeMobileMenu = () => {
+        navList.classList.remove('active');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+    };
+
+    const toggleMobileMenu = () => {
+        const isOpen = navList.classList.toggle('active');
+        hamburger.classList.toggle('active', isOpen);
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+    };
+
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMobileMenu();
+    });
+
+    document.querySelectorAll('#nav-list a').forEach((link) => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+}
 
 // Sticky Navbar
 window.addEventListener('scroll', () => {
