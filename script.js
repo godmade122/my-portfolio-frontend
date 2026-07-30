@@ -34,7 +34,7 @@ themeToggle.addEventListener('click', () => {
 });
 
 //Contact Form Submission
-const contactForm = document.getElementById('contact-form');
+const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -44,22 +44,22 @@ contactForm.addEventListener('submit', (e) => {
     contactForm.reset();
 });
 
-// // Smooth Scrolling for Anchor Links
-// document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-//     anchor.addEventListener('click', function (e) {
-//         e.preventDefault();
-//         const target = document.querySelector(this.getAttribute('href'));
-//         if (target) {
-//             target.scrollIntoView({
-//                 behavior: 'smooth',
-//                 block: 'start'
-//             });
-//             // Close mobile menu if open
-//             navList.classList.remove('active');
-//             hamburger.classList.remove('active');
-//         }
-//     });
-// });
+// Smooth Scrolling for Anchor Links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            // Close mobile menu if open
+            navList.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+    });
+});
 
 // Animate sections on scroll
 const observerOptions = {
@@ -108,7 +108,6 @@ document.querySelectorAll('section > .container').forEach(section => {
     const data = {
         name: form.name.value.trim(),
         email: form.email.value.trim(),
-        subject: form.subject.value.trim(),
         message: form.message.value.trim(),
     };
 
