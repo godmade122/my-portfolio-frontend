@@ -377,23 +377,33 @@ body.dark #contact {
     display: flex;
     gap: 50px;
     align-items: flex-start;
+    flex-wrap: wrap;
 }
 
+#contactForm,
 #contact-form {
-    flex: 1;
+    flex: 1 1 320px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
+    max-width: 600px;
 }
 
+#contactForm input,
+#contactForm textarea,
 #contact-form input,
 #contact-form textarea {
+    width: 100%;
     padding: 15px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 1rem;
+    background-color: #fff;
 }
 
+body.dark #contactForm input,
+body.dark #contactForm textarea,
 body.dark #contact-form input,
 body.dark #contact-form textarea {
     background-color: #2a2a2a;
@@ -401,14 +411,24 @@ body.dark #contact-form textarea {
     color: #e0e0e0;
 }
 
+#contactForm textarea,
 #contact-form textarea {
-    height: 150px;
+    min-height: 150px;
     resize: vertical;
+}
+
+#contactForm button,
+#contact-form button {
+    width: fit-content;
 }
 
 .social-links {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
 }
 
 .social-links a {
@@ -518,6 +538,20 @@ body.dark #whatsapp-chat {
     .contact-content {
         flex-direction: column;
         text-align: center;
+        align-items: center;
+    }
+
+    .contact-content {
+        gap: 30px;
+    }
+
+    #contactForm,
+    #contact-form {
+        max-width: 100%;
+    }
+
+    .social-links {
+        justify-content: center;
     }
 
     .portfolio-grid,
@@ -585,6 +619,33 @@ body.dark #whatsapp-chat {
         gap: 30px;
     }
 
+    #contactForm,
+    #contact-form {
+        gap: 15px;
+    }
+
+    #contactForm input,
+    #contactForm textarea,
+    #contact-form input,
+    #contact-form textarea {
+        padding: 12px 14px;
+        font-size: 0.95rem;
+    }
+
+    #contactForm button,
+    #contact-form button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .social-links {
+        gap: 16px;
+    }
+
+    .social-links a {
+        font-size: 1.3rem;
+    }
+
     .services-grid,
     .testimonials-grid {
         gap: 20px;
@@ -592,6 +653,6 @@ body.dark #whatsapp-chat {
 
     .service-card,
     .testimonial-card {
-        padding: 20px;
+        padding: 50px;
     }
 }
