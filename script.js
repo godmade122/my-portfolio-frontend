@@ -113,10 +113,10 @@ document.querySelectorAll('section > .container').forEach(section => {
     };
 
     try {
-        const response = await fetch("https://my-portfolio-backend-5u2n.onrender.com/api/contact", {
+        const response = await fetch("https://my-portfolio-backend-5u2n.onrender.com/contact", {
             method: "POST",
             headers: {
-                "Contect-Type": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
         });
