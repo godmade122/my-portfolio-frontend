@@ -33,16 +33,16 @@ themeToggle.addEventListener('click', () => {
     }
 });
 
-// Contact Form Submission
-// const contactForm = document.getElementById('contact-form');
+//Contact Form Submission
+const contactForm = document.getElementById('contact-form');
 
-// contactForm.addEventListener('submit', (e) => {
-//     e.preventDefault();
-//     // Here you would typically send the form data to a server
-//     // For this demo, we'll just show an alert
-//     alert('Thank you for your message! I will get back to you soon.');
-//     contactForm.reset();
-// });
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Here you would typically send the form data to a server
+    // For this demo, we'll just show an alert
+    alert('Thank you for your message! I will get back to you soon.');
+    contactForm.reset();
+});
 
 // // Smooth Scrolling for Anchor Links
 // document.querySelectorAll('a[href^="#"]').forEach(anchor => {
