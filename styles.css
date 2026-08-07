@@ -616,8 +616,8 @@ body.dark #whatsapp-chat {
     }
 
     .profile-img img {
-        width: 320px;
-        height: 320px;
+        width: 180px;
+        height: 180px;
         object-fit: fill;
     }
 
