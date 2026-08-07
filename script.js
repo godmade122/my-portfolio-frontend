@@ -39,28 +39,19 @@ window.addEventListener('scroll', () => {
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 
-themeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark');
-    const icon = themeToggle.querySelector('i');
-    if (body.classList.contains('dark')) {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-    } else {
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-    }
-});
-
-//Contact Form Submission
-const contactForm = document.getElementById('contactForm');
-
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // Here you would typically send the form data to a server
-    // For this demo, we'll just show an alert
-    alert('Thank you for your message! I will get back to you soon.');
-    contactForm.reset();
-});
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark');
+        const icon = themeToggle.querySelector('i');
+        if (body.classList.contains('dark')) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        } else {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
+    });
+}
 
 // Smooth Scrolling for Anchor Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -72,9 +63,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 behavior: 'smooth',
                 block: 'start'
             });
-            // Close mobile menu if open
-            navList.classList.remove('active');
-            hamburger.classList.remove('active');
+            if (navList && hamburger) {
+                navList.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
         }
     });
 });
@@ -101,7 +93,6 @@ document.querySelectorAll('section > .container').forEach(section => {
     observer.observe(section);
 });
 
-
 // WhatsApp Chat Button: builds link from data attributes
 (function() {
     const chat = document.getElementById('whatsapp-chat');
@@ -116,37 +107,56 @@ document.querySelectorAll('section > .container').forEach(section => {
     chat.innerHTML = '<i class="fab fa-whatsapp" aria-hidden="true"></i>';
 })();
 
-
 // Contact Form Submission
- const form = document.querySelector('#contactForm');
+const contactForm = document.getElementById('contactForm');
 
- form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-    const data = {
-        name: form.name.value.trim(),
-        email: form.email.value.trim(),
-        message: form.message.value.trim(),
-    };
+        const data = {
+            name: contactForm.elements.name.value.trim(),
+            email: contactForm.elements.email.value.trim(),
+            message: contactForm.elements.message.value.trim(),
+        };
 
-    try {
-        const response = await fetch("https://my-portfolio-backend-5u2n.onrender.com/api/contact", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-
-        const result = await response.json();
-        alert(result.message);
-        if (result.message) {
-            alert("Message sent successfully!");
-            form.reset();
-        } else {
-            alert("result message.");
+        if (!data.name || !data.email || !data.message) {
+            alert('Please fill in all fields before sending.');
+            return;
         }
-    } catch (err) {
-        alert("Server Error");
-    }
- });
+
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const originalText = submitButton ? submitButton.textContent : '';
+
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+        }
+
+        try {
+            const response = await fetch(window.API_BASE_URL || 'http://localhost:5000/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json().catch(() => ({}));
+
+            if (!response.ok) {
+                throw new Error(result.message || 'Unable to send message.');
+            }
+
+            alert(result.message || 'Message sent successfully!');
+            contactForm.reset();
+        } catch (err) {
+            alert(err.message || 'Server Error. Please try again later.');
+        } finally {
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+            }
+        }
+    });
+}
